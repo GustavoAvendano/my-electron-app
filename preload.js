@@ -1,7 +1,9 @@
-const { contextBridge } = require('electron/renderer')
+const { contextBridge, ipcRenderer } = require('electron')
 
 contextBridge.exposeInMainWorld('versions', {
   node: () => process.versions.node,
   chrome: () => process.versions.chrome,
-  electron: () => process.versions.electron
+  electron: () => process.versions.electron,
+  ping: () => ipcRenderer.invoke('ping')
+  // también podemos exponer variables, no solo funciones
 })
